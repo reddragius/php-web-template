@@ -1,35 +1,24 @@
 <?php
-	$pageList = [
-        "uvod" => [
-            "title" => "O nás",
-            "menu" => "O nás"
-        ],
-		"nabidka" => [
-            "title" => "Nabídka",
-            "menu" => "Nabídka"
-        ],
-		"kontakt" => [
-            "title" => "Kontakt",
-            "menu" => "Kontakt"
-        ],
-		"galerie" => [
-            "title" => "Galerie",
-            "menu" => "Galerie"
-        ],
-		"rezervace" => [
-            "title" => "Rezervace",
-            "menu" => "Rezervace"
-        ],
-		"blog" => [
-            "title" => "Blog",
-            "menu" => ""
-        ],
-        "blog-clanek" => [
-            "title" => "Blog - Nejlepší Cheesecake",
-            "menu" => ""
-        ],
-        "404" => [
-            "title" => "Chyba 404",
-            "menu" => ""
-        ]
+    class Page {
+        public $pageID;
+        public $title;
+        public $menu;
+
+        function __construct($pageID, $title, $menu)
+        {
+            $this->pageID = $pageID;
+            $this->title = $title;
+            $this->menu = $menu;
+        }
+    };
+
+    $pageList = [
+        "uvod" => new Page("uvod", "BistroLaza", "O nás"),
+        "nabidka" => new Page("nabidka", "BistroLaza | Nabídka", "Nabídka"),
+        "kontakt" => new Page("kontakt", "BistroLaza | Kontakty", "Kontakty"),
+        "galerie" => new Page("galerie", "BistroLaza | Galerie", "Galerie"),
+        "rezervace" => new Page("rezervace", "BistroLaza | Rezervace", "Rezervace"),
+        "blog" => new Page("blog", "BistroLaza | Blog", ""),
+        "blog-clanek" => new Page("blog-clanek", "BistroLaza | Nejlepší Cheesecake", ""),
+        "404" => new Page("404", "BistroLaza | Chyba 404", "")
     ];

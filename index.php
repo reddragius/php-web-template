@@ -7,7 +7,7 @@
 
 		if (array_key_exists($pageID, $pageList))
 		{	
-			//nic nedelat stranka neexistuje
+			//nic nedelat, když stránka existuje
 		}
 		else
 		{	
@@ -39,7 +39,7 @@
 	<link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 
-	<title>BistroLaza | <?php echo $pageList[$pageID]["title"] ?></title>
+	<title><?php echo $pageList[$pageID]->title ?></title>
 </head>
 
 <body>
@@ -52,9 +52,9 @@
 						echo "<ul>";
 						foreach ($pageList as $id => $page) 
 						{
-							if ($page["menu"] != "") // 404
+							if ($page->menu != "") // 404
 							{
-								echo "<li><a href='$id'>{$page["menu"]}</a></li>";
+								echo "<li><a href='$id'>{$page->menu}</a></li>";
 							}	
 						};
 						echo "</ul>";
@@ -75,7 +75,7 @@
 		</div>
 	</header>
 
-	<section>	
+	<section>
 		<?php
 			echo file_get_contents("$pageID.html");
 		?>
@@ -88,11 +88,11 @@
 					<h3>Menu</h3>
 					<?php
 						echo "<ul>";
-						foreach ($pageList as $id => $page) 
+						foreach ($pageList as $id => $page)
 						{
-							if ($page["menu"] != "") // 404
+							if ($page->menu != "") // 404
 							{
-								echo "<li><a href='$id'>{$page["menu"]}</a></li>";
+								echo "<li><a href='$id'>{$page->menu}</a></li>";
 							}	
 						};
 						echo "</ul>";
