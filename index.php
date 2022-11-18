@@ -1,7 +1,21 @@
 <?php
+	require_once "data.php";
+
 	if (array_key_exists("page", $_GET))
 	{	
 		$pageID = $_GET["page"];
+
+		if (array_key_exists($pageID, $pageList))
+		{	
+			//nic nedelat stranka neexistuje
+		}
+		else
+		{	
+			//zobraz 404, kdyz stránka neexistuje
+			$pageID = "404";
+			//a nastav 404, kdyz stránka neexistuje
+			http_response_code(404);
+		};
 	}
 	else
 	{
@@ -25,23 +39,26 @@
 	<link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 
-	<title>BistroLaza | <?php echo $pageID ?></title>
+	<title>BistroLaza | <?php echo $pageList[$pageID]["title"] ?></title>
 </head>
 
 <body>
 	<header>
 		<div class="headerMenu">
 			<div class="container">
-				<a href="?page=uvod" class="logo">BistroLaza</a>
+				<a href="uvod" class="logo">BistroLaza</a>
 				<div class="menu">
-					<ul>
-						<li><a href="?page=uvod">O nás</a></li>
-						<li><a href="?page=nabidka">Nabídka</a></li>
-						<li><a href="?page=galerie">Galerie</a></li>
-						<li><a href="?page=kontakt">Kontakty</a></li>
-						<li><a href="?page=rezervace">Rezervace</a></li>
-						<li><a href="?page=blog">Blog</a></li>
-					</ul>
+					<?php
+						echo "<ul>";
+						foreach ($pageList as $id => $page) 
+						{
+							if ($page["menu"] != "") // 404
+							{
+								echo "<li><a href='$id'>{$page["menu"]}</a></li>";
+							}	
+						};
+						echo "</ul>";
+					?>
 				</div>
 			</div>
 		</div>
@@ -60,7 +77,7 @@
 
 	<section>	
 		<?php
-			echo file_get_contents("$pageID.html"); // nebo require
+			echo file_get_contents("$pageID.html");
 		?>
 	</section>
 
@@ -69,14 +86,17 @@
 			<div class="container">
 				<div class="footerMenu">
 					<h3>Menu</h3>
-					<ul>
-						<li><a href="?page=uvod">O nás</a></li>
-						<li><a href="?page=nabidka">Nabídka</a></li>
-						<li><a href="?page=galerie">Galerie</a></li>
-						<li><a href="?page=kontakt">Kontakty</a></li>
-						<li><a href="?page=rezervace">Rezervace</a></li>
-						<li><a href="?page=blog">Blog</a></li>
-					</ul>
+					<?php
+						echo "<ul>";
+						foreach ($pageList as $id => $page) 
+						{
+							if ($page["menu"] != "") // 404
+							{
+								echo "<li><a href='$id'>{$page["menu"]}</a></li>";
+							}	
+						};
+						echo "</ul>";
+					?>
 				</div>
 				<div class="contact">
 					<h3>Kontakt</h3>
