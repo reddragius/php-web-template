@@ -1,4 +1,14 @@
 <?php
+    $db = new PDO(
+        "mysql:host=localhost;dbname=bistrolaza;charset=utf8",
+        "root",
+        "", // heslo
+        array(
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        ),
+    );
+    
+
     class Page {
         public $pageID;
         public $title;
@@ -23,22 +33,41 @@
 
         function getContent() 
         {
-            return file_get_contents("$this->pageID.html");
+            global $db;
+            $query = $db->prepare("SELECT content FROM pages WHERE pageID = ?");
+            $query->execute([$this->pageID]);
+
+            $result = $query->fetch();
+
+            // pokud by databaze nic nevratila, tak vratime prazdny obsah
+            if ($result == false)
+            {
+                return "";
+            }
+            else
+            {
+                return $result["content"];
+            }
         }
 
-        function setContent($obsah) 
+        function setContent($content) 
         {
-            file_put_contents("$this->pageID.html", $obsah); // kam chceme ulozit, co chceme ulozit
+            global $db;
+
+            $query = $db->prepare("UPDATE pages SET content = ? WHERE pageID = ?");
+            $query->execute([$content, $this->pageID]);
         }
     }
 
-    $pageList = [
-        "uvod" => new Page("uvod", "BistroLaza | O nás", "O nás"),
-        "nabidka" => new Page("nabidka", "BistroLaza | Nabídka", "Nabídka"),
-        "kontakt" => new Page("kontakt", "BistroLaza | Kontakty", "Kontakty"),
-        "galerie" => new Page("galerie", "BistroLaza | Galerie", "Galerie"),
-        "rezervace" => new Page("rezervace", "BistroLaza | Rezervace", "Rezervace"),
-        "blog" => new Page("blog", "BistroLaza | Blog", ""),
-        "blog-clanek" => new Page("blog-clanek", "BistroLaza | Nejlepší Cheesecake", ""),
-        "404" => new Page("404", "BistroLaza | Chyba 404", "")
-    ];
+    $pageList = [];
+    $query = $db->prepare("SELECT pageID, title, menu FROM pages ORDER BY orderPage");
+    $query->execute();
+    $pages = $query->fetchAll();
+    // vezmeme pole radek, ktere nam vratila databaze a postupne
+    // nakrmime pole $pageList jednotlivymi instancemi tridy Page
+    foreach ($pages as $page)
+    {
+        $pageID = $page["pageID"];
+        // pridame do pole novou instanci tridy Page
+        $pageList[$pageID] = new Page($pageID, $page["title"], $page["menu"]);
+    }
