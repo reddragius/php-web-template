@@ -40,6 +40,7 @@
 	if (array_key_exists("loggedInUser", $_SESSION)) 
 	{	
 		$instanceCurrentPage = null;
+		
 		// zpracovani vyberu aktualni stranky
 		if (array_key_exists("page", $_GET)) 
 		{
@@ -71,6 +72,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+	
 	<title>Admin sekce</title>
 </head>
 <body>
@@ -134,6 +136,12 @@
 						plugins: 'advlist anchor autolink charmap code colorpicker contextmenu directionality emoticons fullscreen hr image imagetools insertdatetime link lists nonbreaking noneditable pagebreak paste preview print save searchreplace tabfocus table textcolor textpattern visualchars',
 						toolbar1: "insertfile undo redo | styleselect | fontselect | fontsizeselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor backcolor",
                     	toolbar2: "link unlink anchor | fontawesome | image media | responsivefilemanager | preview code",
+						// filemanager - adds a new button for upload. Its needs directories: ./upload/source & ./upload/thumbs
+						external_plugins: {
+							'responsivefilemanager': '<?php echo dirname($_SERVER['PHP_SELF']); ?>/vendor/primakurzy/responsivefilemanager/tinymce/plugins/responsivefilemanager/plugin.min.js',
+						},
+						external_filemanager_path: "<?php echo dirname($_SERVER['PHP_SELF']); ?>/vendor/primakurzy/responsivefilemanager/filemanager/",
+						filemanager_title: "Správce souborů",
 					});
 				</script>
 				<?php

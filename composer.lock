@@ -4,8 +4,40 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d373922460e92b73bf49c4e5a8a0d8d",
+    "content-hash": "a88503a305405ba0272cc3c0a4c7e8b1",
     "packages": [
+        {
+            "name": "primakurzy/responsivefilemanager",
+            "version": "v1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PrimaKurzy-cz/responsivefilemanager.git",
+                "reference": "692ebbcf8c2d070aa5ab34040ca067e3672b1e7f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PrimaKurzy-cz/responsivefilemanager/zipball/692ebbcf8c2d070aa5ab34040ca067e3672b1e7f",
+                "reference": "692ebbcf8c2d070aa5ab34040ca067e3672b1e7f",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josef Kyrian / PrimaKurzy.cz",
+                    "email": "josef.kyrian@primakurzy.cz"
+                }
+            ],
+            "description": "Responsive FileManager for TinyMCE and CKEditor (For Educational Purposes Only)",
+            "support": {
+                "issues": "https://github.com/PrimaKurzy-cz/responsivefilemanager/issues",
+                "source": "https://github.com/PrimaKurzy-cz/responsivefilemanager/tree/v1.3"
+            },
+            "time": "2022-04-21T08:00:45+00:00"
+        },
         {
             "name": "tinymce/tinymce",
             "version": "5.10.6",

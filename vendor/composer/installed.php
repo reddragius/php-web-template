@@ -19,6 +19,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'primakurzy/responsivefilemanager' => array(
+            'pretty_version' => 'v1.3',
+            'version' => '1.3.0.0',
+            'reference' => '692ebbcf8c2d070aa5ab34040ca067e3672b1e7f',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../primakurzy/responsivefilemanager',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'tinymce/tinymce' => array(
             'pretty_version' => '5.10.6',
             'version' => '5.10.6.0',
