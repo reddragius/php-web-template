@@ -57,7 +57,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="cs">
-	
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -71,7 +71,6 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
-
 	<title>Admin sekce</title>
 </head>
 <body>
@@ -90,7 +89,7 @@
 		} 
 		else 
 		{
-			// sekce pro prihlasene uzivatele
+			//sekce pro prihlasene uzivatele
 			echo "<h2>Přihlášen uživatel: {$_SESSION["loggedInUser"]}</h2>";
 			echo "<form method='post'>
 					<button name='logout-button'>Logout</button>
@@ -112,11 +111,31 @@
 				echo "<h2>Editace stránky: $instanceCurrentPage->pageID</h2>";
 				?>
 				<form method="post">
-					<textarea name="content" cols="80" rows="15"><?php
+					<textarea id="myTinymce" name="content" cols="80" rows="15" ><?php
 						echo htmlspecialchars($instanceCurrentPage->getContent());
-					?></textarea><br>
+					?></textarea>
+					<br>
 					<button name="save-button">Uložit</button>
 				</form>
+				<script src="vendor/tinymce/tinymce/tinymce.min.js"></script>
+				<script>
+					tinymce.init({
+						selector: '#myTinymce',
+						language: 'cs',
+						language_url: '<?php echo dirname($_SERVER["PHP_SELF"]); ?>/vendor/tweeb/tinymce-i18n/langs/cs.js',
+						height: '50vh', // vyska okna editoru
+						entity_encoding: "raw", // fix kodovani
+						verify_html: false, // fix fontawesome icon - empty space
+						content_css: [
+							"css/main.min.css",
+							"css/all.min.css", 
+							"https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Open+Sans:wght@300;400;700&display=swap"
+						], //load my css, fontawesome css, google font css
+						plugins: 'advlist anchor autolink charmap code colorpicker contextmenu directionality emoticons fullscreen hr image imagetools insertdatetime link lists nonbreaking noneditable pagebreak paste preview print save searchreplace tabfocus table textcolor textpattern visualchars',
+						toolbar1: "insertfile undo redo | styleselect | fontselect | fontsizeselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor backcolor",
+                    	toolbar2: "link unlink anchor | fontawesome | image media | responsivefilemanager | preview code",
+					});
+				</script>
 				<?php
 			}
 		}
