@@ -1,0 +1,47 @@
+body {
+    background-color: #f5f5f5;
+}
+
+h2 {
+	padding: 20px 0;
+}
+
+.admin-body {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[name="user"] {
+    margin-bottom: 5px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[name="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.admin {
+    max-width: 1000px;
+    width: 100%;
+    margin: auto;
+}
+
+#pages .btn {
+    margin-right: 0.25em;
+}
