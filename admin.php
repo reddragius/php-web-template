@@ -51,8 +51,20 @@
 		// zpracovani formu pro ulozeni
 		if (array_key_exists("save-button", $_POST))
 		{
+			// ulozit puvodni page ID nez si ho prepisu
+			$originPageID = $instanceCurrentPage->pageID;
+
+			$instanceCurrentPage->pageID = $_POST["pageID"];
+			$instanceCurrentPage->title = $_POST["title"];
+			$instanceCurrentPage->menu = $_POST["menu"];
+			$instanceCurrentPage->save($originPageID);
+
+			// ukladani obsahu stranky
 			$content = $_POST["content"];
 			$instanceCurrentPage->setContent($content);
+
+			// presmerujeme se na url s editaci stranky s novym id
+			header("Location: ?page=".$instanceCurrentPage->pageID);
 		}
 	}
 ?>
@@ -66,7 +78,6 @@
 	<meta name="description" content="Page description.">
 	<meta name="robots" content="index">
 	
-	<link rel="stylesheet" href="css/admin.css">
 	<link rel="stylesheet" href="css/all.min.css"><!-- css fontawesome  -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,7 +85,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-	
+	<link rel="stylesheet" href="css/admin.css">
 	
 	<title>Admin sekce</title>
 </head>
@@ -147,12 +158,40 @@
 					};
 				echo "</ul>";
 				
-				// editacni formular, zobrazit pokud je nejaka stranka vybrana k editaci
+				// editacni formular tinymce
 				if (isset($instanceCurrentPage))
 				{
 					echo "<h2>Editace stránky: $instanceCurrentPage->pageID</h2>";
 					?>
 					<form method="post">
+						<div>
+							<label for="pageID">ID:</label>
+							<input
+								type="text"
+								name="pageID"
+								id="pageID"
+								value="<?php echo htmlspecialchars($instanceCurrentPage->pageID) ?>"
+							>
+						</div>
+						<div>
+							<label for="title">Titulek:</label>
+							<input
+								type="text"
+								name="title"
+								id="title"
+								value="<?php echo htmlspecialchars($instanceCurrentPage->title) ?>"
+							>
+						</div>
+						<div>
+							<label for="menu">Menu:</label>
+							<input
+								type="text"
+								name="menu"
+								id="menu"
+								value="<?php echo htmlspecialchars($instanceCurrentPage->menu) ?>"
+							>
+						</div>
+
 						<textarea id="myTinymce" name="content" cols="80" rows="15" ><?php
 							echo htmlspecialchars($instanceCurrentPage->getContent());
 						?></textarea>

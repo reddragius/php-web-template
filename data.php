@@ -57,6 +57,15 @@
             $query = $db->prepare("UPDATE pages SET content = ? WHERE pageID = ?");
             $query->execute([$content, $this->pageID]);
         }
+
+        function save($originPageID)
+        {
+            global $db;
+
+            $query = $db->prepare("UPDATE pages SET pageID = ?, title = ?, menu = ? WHERE pageID = ?");
+            $query->execute([$this->pageID, $this->title, $this->menu, $originPageID]);
+        }
+
     }
 
     $pageList = [];
