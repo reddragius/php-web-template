@@ -1,5 +1,6 @@
 <?php
 	require_once "data.php";
+	require_once "vendor/autoload.php";
 
 	if (array_key_exists("page", $_GET))
 	{	
@@ -77,7 +78,8 @@
 
 	<section>
 		<?php
-			echo $pageList[$pageID]->getContent();
+			$content = $pageList[$pageID]->getContent();
+			echo primakurzy\Shortcode\Processor::process('shortcodes', $content);
 		?>
 	</section>
 
