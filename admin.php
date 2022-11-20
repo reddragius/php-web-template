@@ -173,7 +173,17 @@
 				echo "</ul>";
 
 				// formular s tlacitkem pro pridani stranky
-				echo "<form><button name='newpage-button'><i class='fa-solid fa-file-circle-plus'></i> Nová stránka</button></form>";
+				?>
+				<div class="container">
+					<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
+						<div class="col-md-3 text-start">
+							<form>
+								<button name='newpage-button' class="btn btn-outline-primary me-2"><i class='fa-solid fa-file-circle-plus'></i> Nová stránka</button>
+							</form>
+						</div>
+					</header>
+				</div>
+				<?php
 				
 				// editacni formular tinymce
 				if (isset($instanceCurrentPage))
@@ -189,32 +199,38 @@
 					echo "</h2>";
 					?>
 					<form method="post">
-						<div>
-							<label for="pageID">ID:</label>
+						<div class="form-floating mb-1">
 							<input
+								class="form-control"
 								type="text"
 								name="pageID"
 								id="pageID"
 								value="<?php echo htmlspecialchars($instanceCurrentPage->pageID) ?>"
+								placeholder="ID"
 							>
+							<label for="pageID">ID:</label>
 						</div>
-						<div>
-							<label for="title">Titulek:</label>
+						<div class="form-floating mb-1">	
 							<input
+								class="form-control"
 								type="text"
 								name="title"
 								id="title"
 								value="<?php echo htmlspecialchars($instanceCurrentPage->title) ?>"
+								placeholder="Titulek"
 							>
+							<label for="title">Titulek:</label>
 						</div>
-						<div>
-							<label for="menu">Menu:</label>
+						<div class="form-floating mb-1">
 							<input
+								class="form-control"
 								type="text"
 								name="menu"
 								id="menu"
 								value="<?php echo htmlspecialchars($instanceCurrentPage->menu) ?>"
+								placeholder="Menu"
 							>
+							<label for="menu">Menu:</label>
 						</div>
 
 						<textarea id="myTinymce" name="content" cols="80" rows="15" ><?php
