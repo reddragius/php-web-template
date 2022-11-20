@@ -82,6 +82,15 @@
                 $query->execute([$this->pageID, $this->title, $this->menu, $orderPage]);
             }
         }
+
+        function delete() 
+        {
+            //delete page
+            global $db;
+
+            $query = $db->prepare("DELETE FROM pages WHERE pageID = ?");
+            $query->execute([$this->pageID]);
+        }
     }
 
     $pageList = [];

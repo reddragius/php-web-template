@@ -54,6 +54,13 @@
 			$instanceCurrentPage = new Page("", "","");
 		}
 
+		// zpracovani mazani
+		if (array_key_exists("delete", $_GET))
+		{
+			$instanceCurrentPage->delete();
+			header("Location: ?");
+		}
+
 		// zpracovani formu pro save-button
 		if (array_key_exists("save-button", $_POST))
 		{
@@ -158,6 +165,7 @@
 						}
 						echo "<li class='list-group-item $active'>
 								<a href='?page=$pageID' class='btn $buttonClass'><i class='fa-solid fa-pen-to-square'></i></a>
+								<a href='?page=$pageID&delete' class='btn $buttonClass'><i class='fa-solid fa-trash-can'></i></i></a>
 								<a href='$pageID' class='btn $buttonClass' target='_blank'><i class='fa-solid fa-eye'></i></a>
 								<span>$pageID</span>
 							</li>";
