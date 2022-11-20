@@ -48,7 +48,13 @@
 			$instanceCurrentPage = $pageList[$pageID];
 		}
 
-		// zpracovani formu pro ulozeni
+		// zpracovani tlacitka newpage-button
+		if (array_key_exists("newpage-button", $_GET))
+		{
+			$instanceCurrentPage = new Page("", "","");
+		}
+
+		// zpracovani formu pro save-button
 		if (array_key_exists("save-button", $_POST))
 		{
 			// ulozit puvodni page ID nez si ho prepisu
@@ -157,11 +163,22 @@
 							</li>";
 					};
 				echo "</ul>";
+
+				// formular s tlacitkem pro pridani stranky
+				echo "<form><button name='newpage-button'><i class='fa-solid fa-file-circle-plus'></i> Nová stránka</button></form>";
 				
 				// editacni formular tinymce
 				if (isset($instanceCurrentPage))
 				{
-					echo "<h2>Editace stránky: $instanceCurrentPage->pageID</h2>";
+					echo "<h2>";
+					if ($instanceCurrentPage->pageID == "")
+					{
+						echo "Přidávání nové stránky";
+					} 
+					else {
+						echo "Editace stránky: $instanceCurrentPage->pageID";
+					}
+					echo "</h2>";
 					?>
 					<form method="post">
 						<div>

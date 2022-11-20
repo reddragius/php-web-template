@@ -59,13 +59,29 @@
         }
 
         function save($originPageID)
-        {
+        {          
             global $db;
 
-            $query = $db->prepare("UPDATE pages SET pageID = ?, title = ?, menu = ? WHERE pageID = ?");
-            $query->execute([$this->pageID, $this->title, $this->menu, $originPageID]);
-        }
+            if ($originPageID != "")
+            {
+                // jde o aktualizaci existujici stranky
+                $query = $db->prepare("UPDATE pages SET pageID = ?, title = ?, menu = ? WHERE pageID = ?");
+                $query->execute([$this->pageID, $this->title, $this->menu, $originPageID]);
+            }
+            else
+            {
+                // jde o pridavani nove stranky
+                // zjisteni maximalniho poradi
+                $query = $db->prepare("SELECT MAX(orderPage) AS orderPage FROM pages");
+                $query->execute();
+                $result = $query->fetch();
+                // vezmeme nejvysi poradi ktere je v tabulce a navysime o 1
+                $orderPage = $result["orderPage"] + 1;
 
+                $query = $db->prepare("INSERT INTO pages SET pageID = ?, title = ?, menu = ?, orderPage = ?");
+                $query->execute([$this->pageID, $this->title, $this->menu, $orderPage]);
+            }
+        }
     }
 
     $pageList = [];
