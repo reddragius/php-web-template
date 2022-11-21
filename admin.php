@@ -182,7 +182,7 @@
 						}
 						echo "<li class='list-group-item $active' id='$pageID'>
 								<a href='?page=$pageID' class='btn $buttonClass'><i class='fa-solid fa-pen-to-square'></i></a>
-								<a href='?page=$pageID&delete' class='btn $buttonClass'><i class='fa-solid fa-trash-can'></i></i></a>
+								<a href='?page=$pageID&delete' class='trash btn $buttonClass'><i class='fa-solid fa-trash-can'></i></i></a>
 								<a href='$pageID' class='btn $buttonClass' target='_blank'><i class='fa-solid fa-eye'></i></a>
 								<span>$pageID</span>
 							</li>";

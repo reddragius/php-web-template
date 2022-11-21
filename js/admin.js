@@ -11,3 +11,12 @@ $("#pages").sortable({
         })
     }
 });
+
+// protection against accidental page deletion
+$("#pages .trash").click((event) => {
+    if (confirm("Opravdu chcete danou stránku smazat?") == false)
+    {
+        // interrupt event
+        event.preventDefault();
+    }
+});
