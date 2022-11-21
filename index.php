@@ -157,6 +157,8 @@
 			</div>
 		</div>
 	</footer>
+	<div id="upBtn"><i class="fa-solid fa-angle-up"></i></div>
+	<script src="js/main.js"></script>
 </body>
 
 </html>
