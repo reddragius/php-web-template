@@ -39,6 +39,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="vendor/photoswipe/dist/photoswipe.css">
 
 	<title><?php echo $pageList[$pageID]->getTitle() ?></title>
 </head>
