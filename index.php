@@ -20,7 +20,7 @@
 	}
 	else
 	{
-		$pageID = "uvod";
+		$pageID = array_key_first($pageList); // zobraz první stránku ze seznamu stránek dle aktualniho poradi
 	}
 ?>
 <!DOCTYPE html>
@@ -47,7 +47,7 @@
 	<header>
 		<div class="headerMenu">
 			<div class="container">
-				<a href="uvod" class="logo">BistroLaza</a>
+				<a href="<?php echo array_key_first($pageList);?>" class="logo">BistroLaza</a>
 				<div class="menu">
 					<?php
 						echo "<ul>";
@@ -63,7 +63,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="headerInfo">
+		<?php
+		if ($pageID == array_key_first($pageList))
+		{	
+			?>
+			<div class="headerInfo">
 			<div class="container">
 				<p class="headerInfoText">BistroLaza</p>
 				<p>Jsme tu pro vás již od roku 2000</p>
@@ -74,6 +78,9 @@
 				</p>
 			</div>
 		</div>
+		<?php
+		}
+		?>
 	</header>
 
 	<section>

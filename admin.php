@@ -79,6 +79,21 @@
 			// presmerujeme se na url s editaci stranky s novym id
 			header("Location: ?page=".$instanceCurrentPage->pageID);
 		}
+		
+		// zpracovani pozadavku zmeny poradi stranek z javascriptu (ajaxem)
+		if (array_key_exists("orderPage", $_GET))
+		{
+			$orderPage = $_GET["orderPage"];
+
+			// zavolani funkce pro nastaveni poradi a ulozeni do db
+			Page::setPageOrder($orderPage);
+
+			// odpovime javascriptu ze je to ok
+			echo "OK";
+			// skript ukoncime aby do javascriptu se negeneroval zbytek
+			// html stranky
+			exit;
+		}
 	}
 ?>
 <!DOCTYPE html>
@@ -98,6 +113,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+ 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<link rel="stylesheet" href="css/admin.css">
 	
 	<title>Admin sekce</title>
@@ -163,7 +180,7 @@
 							$active = 'active';
 							$buttonClass = 'btn-secondary';
 						}
-						echo "<li class='list-group-item $active'>
+						echo "<li class='list-group-item $active' id='$pageID'>
 								<a href='?page=$pageID' class='btn $buttonClass'><i class='fa-solid fa-pen-to-square'></i></a>
 								<a href='?page=$pageID&delete' class='btn $buttonClass'><i class='fa-solid fa-trash-can'></i></i></a>
 								<a href='$pageID' class='btn $buttonClass' target='_blank'><i class='fa-solid fa-eye'></i></a>
@@ -270,5 +287,6 @@
 			}
 		?>
 	</div>
+	<script src="js/admin.js"></script>
 </body>
 </html>

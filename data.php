@@ -91,6 +91,18 @@
             $query = $db->prepare("DELETE FROM pages WHERE pageID = ?");
             $query->execute([$this->pageID]);
         }
+
+        static function setPageOrder($orderPage)
+        {
+            global $db;
+
+            // projdeme pole s poradim (pole je cislovane)
+            foreach ($orderPage as $number => $pageID)
+            {
+                $query = $db->prepare("UPDATE pages SET orderPage = ? WHERE pageID = ?");
+                $query->execute([$number, $pageID]);
+            }
+        }
     }
 
     $pageList = [];
